@@ -11,7 +11,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+    environment: Cloudlfare pages
     permissions:
       contents: read
       deployments: write
@@ -25,7 +25,7 @@ jobs:
         uses: cloudflare/pages-action@1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: YOUR_ACCOUNT_ID
-          projectName: YOUR_PROJECT_NAME
-          directory: YOUR_ASSET_DIRECTORY
+          accountId: ${{ secrets.ACCOUNT_ID }}
+          projectName: ${{ secrets.PROJECT_NAME }}
+          directory: ${{ secrets.ASSET_DIRECTORY }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
