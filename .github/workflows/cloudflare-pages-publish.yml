@@ -1,0 +1,31 @@
+name: Cloudflare Pages Publish
+
+on:
+  push:
+    branches: [ "production" ]
+  pull_request:
+    branches: [ "production" ]
+
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      deployments: write
+    
+    name: Publish job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Publish
+        uses: cloudflare/pages-action@1.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: YOUR_ACCOUNT_ID
+          projectName: YOUR_PROJECT_NAME
+          directory: YOUR_ASSET_DIRECTORY
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
